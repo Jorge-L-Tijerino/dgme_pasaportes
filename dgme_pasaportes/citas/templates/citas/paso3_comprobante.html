@@ -1,0 +1,13 @@
+{% extends 'citas/base.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-header">Paso 3 de 3 - Comprobante</div>
+  <div class="card-body">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success">Generar Confirmación</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

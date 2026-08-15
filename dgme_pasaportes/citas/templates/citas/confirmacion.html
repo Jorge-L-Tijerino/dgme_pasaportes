@@ -1,0 +1,103 @@
+{% extends 'citas/base.html' %}
+{% block content %}
+
+<div class="container my-4">
+  <!-- Ticket Comprobante -->
+  <div id="ticket-comprobante" class="card shadow-lg border-primary">
+    <div class="card-header bg-primary text-white text-center">
+      <h4>DGME Nicaragua - Comprobante de Cita</h4>
+    </div>
+    <div class="card-body">
+      <h5 class="text-center mb-3">Código de Confirmación: 
+        <span class="fw-bold text-primary">{{ cita.codigo_confirmacion }}</span>
+      </h5>
+
+      <!-- QR Code -->
+      <div class="text-center mb-3">
+        <div class="border p-3 d-inline-block">
+          <h6 class="mb-2">Validación QR</h6>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ cita.codigo_confirmacion }}" 
+               alt="QR Code" class="img-thumbnail">
+        </div>
+        <p class="text-muted mt-2">Escanee este código en la sede para validar su cita</p>
+      </div>
+
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Nombre</th>
+            <td>{{ cita.nombres }} {{ cita.apellidos }}</td>
+          </tr>
+          <tr>
+            <th>Cédula</th>
+            <td>{{ cita.cedula }}</td>
+          </tr>
+          <tr>
+            <th>Tipo de Trámite</th>
+            <td>{{ cita.tipo_tramite }}</td>
+          </tr>
+          <tr>
+            <th>Sede</th>
+            <td>{{ cita.sede_sertrami }}</td>
+          </tr>
+          <tr>
+            <th>Fecha</th>
+            <td>{{ cita.fecha_cita }}</td>
+          </tr>
+          <tr>
+            <th>Hora</th>
+            <td>{{ cita.hora_cita }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-muted text-center">
+        Este comprobante es válido únicamente para la cita agendada en la DGME Nicaragua.
+      </p>
+    </div>
+  </div>
+
+  <!-- Botones de acción -->
+  <div class="text-center mt-4">
+    <button class="btn btn-success me-2" onclick="window.print()">Imprimir Comprobante / Descargar PDF</button>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Salir</a>
+  </div>
+</div>
+
+<!-- Estilos de impresión -->
+<style>
+@media print {
+  /* Ocultar elementos innecesarios */
+  nav, header, footer, .navbar, .banner, .stepper, .btn, .search-bar, .form-control {
+    display: none !important;
+  }
+
+  /* Ticket ocupa toda la hoja */
+  #ticket-comprobante {
+    margin: 0;
+    padding: 20px;
+    border: 2px solid #000;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 8px;
+    border: 1px solid #000;
+  }
+}
+</style>
+
+{% endblock %}

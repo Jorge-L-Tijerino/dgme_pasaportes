@@ -1,0 +1,14 @@
+{% extends 'citas/base.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h2>Requisitos del Trámite</h2>
+    <ul>
+      <li>Pasaporte nuevo: Cédula vigente, partida de nacimiento.</li>
+      <li>Renovación: Pasaporte anterior, cédula vigente.</li>
+      <li>Reposición: Denuncia policial, cédula vigente.</li>
+    </ul>
+    <a href="{% url 'paso1' %}" class="btn btn-primary">Iniciar Trámite</a>
+  </div>
+</div>
+{% endblock %}
